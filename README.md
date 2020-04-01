@@ -25,21 +25,26 @@ Since a PMCW chip can exhibit a period much shorter than a standard FMCW chirp, 
     ├── requirements.txt        # Required dependencies to run this package.
 
 ## Introduction
+Human communication manifests itself in many forms. In order to interact with each other, we most often employ our voices to speak, the written word to record messages, and body movement to augment the ways we express ourselves. As we adopt the move towards "smart" devices for our everyday machines, it's imperative that we build out robust systems that allow us to use all of our existing modes of communication to interact with our machines. \\
+Naturally, the microphone's ability to measure incoming sound waves make this sensor well suited to the task of digitizing the human voice. Similarly, a camera's ability to capture high definition colored 2D spatial projections of our 3D environment allows it to be used in image classification (and thus text reading) with high accuracy. For body gestures, humans can gleam this understanding from a temporal sequence of colored 2D images of the 3D environment. However, while the human sensory input might be images, messages are communicated simply because we understand 'what' is moving, 'how' it is moving, and ignore the rest of the extraneous information. As a computer vision task, deciding 'what' is important in a scene and 'how' important things move is itself an ongoing field of study. Just estimating a starting and ending location in a 3D environment from the 2D image is a complex task. Thus, in order to classify human gestures, one option is to look for a more direct means of gathering the useful information without the extraneous data.
+
+Since we desire to know accurate range information and near-instantaneous velocity information, the natural sensor to chose would be a RAdio Detection And Ranging (RADAR or radar) system. It's high range-resolution and high doppler-resolution as well as simple processing allow it to serve the goal of human gesture recognition well; despite it not being a core human sensory capability.
 
 ## Literature Review
+Indeed, much work has been done in the past to explore the use of radar systems for this application. In 2016, Google unveiled a radar chip \cite{soli_radar}, designated Project Soli, dedicated solely to aim of classifying hand gestures. Later that year, a CNN+RNN neural network architecture was proposed to evaluate the feasibility of classifying between 11 different hand gestures on the Soli platform \cite{soli_classification}. In 2018, Texas Instruments demonstrated the capacity for their general purpose IWR1443 MIMO radar to recognize a simple twirl gesture at the annual Comsumer Electronics Show (CES). In late 2019, Google announced that the Soli radar chip would ship on the technology company's flagship Google Pixel 4 smartphone. The radar systems used in these developments were all FMCW radar systems. Around the same time, a new method for signal transmission was proposed using DCM techniques to obtain the same range differentiation \cite{DCM_Uhnder}. One major advantage of using modulated codes with beneficial autocorrelation properties is the significantly smaller transmission period $T_c$, integer transmission length $L_c$, and overall transmission time $T_cL_c$ needed to gather ranging information. Consequently, the range resolution improves greatly. Additionally, 
+
 
 ## RADAR Fundatmentals
 ### General Background
-
 ### Frequency-Modulated-Continuous-Wave (FMCW)
-
 ### Pulse-Modulated-Continuous-Wave (PMCW)
 
 ## Experimental Design
+### Judo Module Radar Description
+### RDC1 to RDC2
+### Classification
 
 ## Experiemntal Results
 ### Results
-
 ### Analysis
-
 ### References
