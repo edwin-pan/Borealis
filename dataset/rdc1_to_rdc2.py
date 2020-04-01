@@ -120,18 +120,35 @@ def rdc1_to_rdc2(fpath, visualize_flag=False):
 
 if __name__ == '__main__':
     print('----- Unit Test for rdc1_to_rdc2 -----')
-    filepath = 'C:\\Users\\Edwin\\Documents\\PreSense\\uDoppler-Classification\\data\\raw\\Judo\\20200331\\192.168.95.1_20200331105730_3.7meters'    
+    # Grab current repository directory
+    repo_dir = os.path.abspath(os.getcwd())[:-8]
     
-    savepath = 'C:\\Users\\Edwin\\Documents\\PreSense\\uDoppler-Classification\\data\\processed'
+    # Grab raw and processed directories
+    data_raw_dir = os.path.join(repo_dir, 'data\\raw')
+    data_processed_dir = os.path.join(repo_dir, 'data\\processed')
     
-    files_per_dir = 4
-    scanned_person = 'YLC'
+    # Grab png directory
+    data_png_dir = os.path.join(repo_dir, 'data\\png')
     
-    for i in range(files_per_dir):
-        # Process the data
-        data = rdc1_to_rdc2(os.path.join(filepath, 'scan_00000' + str(i) + '_rdc1.bin'), visualize_flag=True)
-
-        # Save the data
-        np.save(os.path.join(savepath, scanned_person+str(i)), data)
+    # Create directories if they don't exist
+    if not os.path.exists(data_raw_dir):
+        os.makedirs(data_raw_dir)
+    if not os.path.exists(data_processed_dir):
+        os.makedirs(data_processed_dir)
+    if not os.path.exists(data_png_dir):
+        os.makedirs(data_png_dir)
     
+    # Define Necessary Constants
+    datadir_name = next(os.walk(data_raw_dir))[1] # Grab all scan directories
+    files_per_dir = 5
+    
+    for datadir in datadir_name:
+        filepath = os.path.join(data_raw_dir, datadir)
+        print("Processing ata @: ", filepath)
+        for i in range(files_per_dir):
+            # Process the data
+            data = rdc1_to_rdc2(os.path.join(filepath, 'scan_00000' + str(i) + '_rdc1.bin'), visualize_flag=True)
+    
+            # Save the data
+            np.save(os.path.join(data_processed_dir, datadir + '_' + str(i)), data)
     
