@@ -1,0 +1,99 @@
+SCP-UHP: ** Event handler IP_RECEIVE_EVENT took 3353 us to run
+SCP-UHP: connected data logger peer at C0A85F02:55940 with UHDP version 30
+SCP-LOG: <UHDP:UHDP><info> UHDP hello packet received
+SCP-UHP: Sabine Radar Software version srs-v0.6.3-BF6+0-864cc25dd2bc
+SCP-LOG: <ENG:event-handler><always> SRS version # 864cc25dd2bc8562
+SCP-UHP:           Radar IPv4 address: 192.168.95.1
+SCP-UHP: Radar Ethernet (MAC) address: 70:B3:D5:5F:BF:FF
+SCP-UHP:               Radar hostname: no factory cal
+SCP-UHP:                Board Name/ID: JDO-5-004
+SCP-UHP:                      Chip ID: 0x00
+SCP-UHP:                    Boot Mode: (2) BOOT_ENABLE_ANALOG_INIT_APPLY_CAL_CORRECTIONS
+SCP-UHP:                  Boot Config: PRINT_RIDGES
+SCP-UHP:                         Judo: PIB48 + ADB2 + ADB2
+SCP-UHP: Checking ethernet status counters...
+SCP-UHP: Current temperatures: chip(55.68C)  board(38.38C)
+SCP-UHP: uptime: 0 days, 00:13:02
+SCP-UHP: UART Configuration: 182000 N81
+SCP-LOG: <RDC><always> all required calibration keys are present
+SCP-LOG: <RDC><always> Vrx align :: target/spillover detection passed
+SCP-LOG: <R-HAL:AnalogInit><always> ADI Sync status OK (ADI_SYNC_SENSE=00000000)!
+SCP-LOG: <R-HAL:MicroDCCal><always> No False Scan Ends Detected :-)
+SCP-UHP: ** Event handler IP_RECEIVE_EVENT took 6472 us to run
+SCP-LOG: <ENG:event-handler><always> *********************BOOTED FROM FLASH*********************
+SCP-UHP: ************************ COLD BOOT ************************
+SCP-UHP: ** Event handler WATCHDOG_TIMER took 10679 us to run
+SCP-UHP: ** Event handler POWER_LOG_TIMER_EVENT took 11190 us to run
+SCP-UHP: Normal Capture Mode - mask: 0x007A intervals: 1,1,1 ScanCoreDump: 0 ProcCoreDump: 0
+SCP-UHP: RDC1(pulses 0:65535)
+SCP-UHP: Forcing RDC layer to keep SI for radar data agent
+SCP-LOG: <UHDP:radar-data><info> Datalog Control Updated, logger mode = 0
+SCP-UHP: RadarDataAgent: Scan START received (persistent=OFF)
+SCP-UHP: ===== compose_one_scan() ================================================================================
+SCP-UHP: ==  R=128, N=1008, ch_ratio=14, Lp=11264, 500Mcps, vp_mode=1, umsk=1, rdc1_shared=2,
+SCP-UHP: ==  ss_dop=7, rx_delay=-1, tx_early_squelch=1024, rx_early_unsquelch=1024,
+SCP-UHP: ==  antenna_config=0 (ADB Traditional 1D), rb_combine=1, scan_interval=0 us
+SCP-UHP: ==  tx_map=0x7f4 (.0987654.2..) (in HW-12 order), tx_mask=0xfff, tx_dsquelch=0xfff
+SCP-UHP: ==  tx_gain=Tx_Gain_4_1, tx_bw=Tx_BW_28_28_12_12_02_02
+SCP-UHP: ==  rx_gain=VGAGain_0_15_15_1_7, rx_bw=Rx_BW_c23091314140101_f00000000000000, rx_map=0x00ff
+SCP-UHP: ==  carrier_frequency=77.500 GHz
+SCP-UHP: =========================================================================================================
+SCP-UHP: set_shared_rdc1(2)
+SCP-UHP: Gain Manager: using previously cached CIU Scale Factors
+SCP-UHP: Allocating 2 Scan Instances @ 344 bytes each in RHAL_DRAM
+SCP-UHP: Allocating 2 shared RDC1 buffer @ 37160960 bytes each in RHAL_DRAM
+SCP-UHP: Allocating 2 shared RDC1 Exponent buffer @ 4096 bytes each in RHAL_DRAM
+SCP-UHP: Using full-matrix angle calibration
+SCP-UHP: Nyquist oversampling factor (azimuth)   = 3, FOV = -58.58 to 57.14 degrees (wrap false)
+SCP-UHP: Nyquist oversampling factor (elevation) = 1, FOV = 0.00 to 0.00 degrees (wrap false)
+SCP-UHP: BEAMFORMING: Az_Ad 0.50 Az_N 50 El_Ad 0.00 El_N 1
+SCP-UHP: Clutter Image SVA enabled, Detections SVA enabled, Nyquist factor (Az, El, 2nd pass) 3 1 1
+SCP-UHP: Gain Manager: using previously cached FEU Scale Factors and NSU RDC3 Thresholds
+SCP-UHP: Allocating 3 Proc Instances @ 9076 bytes each in RHAL_DRAM
+SCP-UHP: Allocating 8 COV Instances @ 52 bytes each in RHAL_DRAM
+SCP-UHP: Allocating 8 SVD Instances @ 56 bytes each in RHAL_DRAM
+SCP-UHP: Allocating 3 RDC3/StaticSlice/Histogram buffers @ 560128 bytes each in RHAL_DRAM
+SCP-UHP: Allocating 3 Channelizer RDC2 buffers @ 128160 bytes each in RHAL_DCU
+SCP-UHP: Allocating 8 COV buffers @ 65536 bytes each in RHAL_DRAM
+SCP-UHP: Allocating 8 SVD buffers @ 65536 bytes each in RHAL_DRAM
+SCP-UHP: STARTING 5 SCANS
+SCP-UHP: **********Trigger FULL mini cal for all RX**********
+SCP-UHP: RHAL_DRAM available memory = 87655712 (83.60 MB)
+SCP-UHP: RHAL_DCU  available memory = 1321056 (1.26 MB)
+SCP-UHP: ** Event handler IP_RECEIVE_EVENT took 317570 us to run
+SCP-LOG: <R-HAL:MiniCal><warn> DC Minical for Rx0: DC difference across Lane is more than 6
+SCP-UHP: DC Minical for Rx0:  Per-lane DC range:    I = -5.71 ... 4.11    Q = 0.34 ... 1.06
+SCP-UHP: Rx[0] Adapt zero cal is complete and DC is OK: DC i =   1.15 q =   1.32
+SCP-LOG: <R-HAL:MiniCal><warn> DC Minical for Rx1: DC difference across Lane is more than 6
+SCP-UHP: DC Minical for Rx1:  Per-lane DC range:    I = -3.94 ... 2.76    Q = 0.26 ... 1.66
+SCP-UHP: Rx[1] Adapt zero cal is complete and DC is OK: DC i =   0.95 q =  -0.92
+SCP-LOG: <R-HAL:MiniCal><warn> DC Minical for Rx2: DC difference across Lane is more than 6
+SCP-UHP: DC Minical for Rx2:  Per-lane DC range:    I = -4.51 ... 2.93    Q = 0.07 ... 1.13
+SCP-UHP: Rx[2] Adapt zero cal is complete and DC is OK: DC i =   1.76 q =   0.81
+SCP-LOG: <R-HAL:MiniCal><warn> DC Minical for Rx3: DC difference across Lane is more than 6
+SCP-UHP: DC Minical for Rx3:  Per-lane DC range:    I = -0.35 ... 0.71    Q = -2.59 ... 5.33
+SCP-UHP: Rx[3] Adapt zero cal is complete and DC is OK: DC i =   0.82 q =  -0.54
+SCP-LOG: <R-HAL:MiniCal><warn> DC Minical for Rx4: DC difference across Lane is more than 6
+SCP-UHP: DC Minical for Rx4:  Per-lane DC range:    I = -1.37 ... 0.01    Q = -2.32 ... 5.47
+SCP-UHP: Rx[4] Adapt zero cal is complete and DC is OK: DC i =   1.64 q =  -1.07
+SCP-UHP: Rx[5] Adapt zero cal is complete and DC is OK: DC i =   1.75 q =   0.43
+SCP-UHP: Rx[6] Adapt zero cal is complete and DC is OK: DC i =   0.23 q =   0.79
+SCP-UHP: Rx[7] Adapt zero cal is complete and DC is OK: DC i =   2.58 q =   0.37
+SCP-LOG: <R-HAL:MiniCal><always> Mini-DC-Calibration is DONE with all the DC values are OK.
+SCP-LOG: <R-HAL:GainMgr><warn> CIU gains have not converged underflow 0 overflow 1
+SCP-UHP: [0] CIU OVERFLOWS -- DISCARDING SCAN
+SCP-UHP: [0] DET:   0 (  0 Ss,   0 Dyn);   ACT: Lo: 114 ( 0.0- 0.0 dB SNR), Hi: 512, Xtra:   1, Cutoff:   0 ( 0.0 dB SNR)
+SCP-UHP: SLR_RIDGE: |                                                                                                                                |
+SCP-UHP: SLR_RIDGE: | 4   6 4    45 4            4 4  5   5   5  4    55   754                4       4 4   5  465     4  66     4  44    454 4      |
+SCP-UHP: [1] DET:  16 ( 16 Ss,   0 Dyn);   ACT: Lo:  11 (14.8-16.2 dB SNR), Hi:   0, Xtra:   1, Cutoff:  12 ( 0.0 dB SNR)
+SCP-UHP: SLR_RIDGE: |                                                                                                                                |
+SCP-UHP: SLR_RIDGE: |44   4  4  5 4      4            4      44 575      4        44  44  55  4        4                   4  4  666       4   4    4|
+SCP-UHP: [2] DET:  18 ( 18 Ss,   0 Dyn);   ACT: Lo: 512 ( 9.5-14.0 dB SNR), Hi:   0, Xtra:   1, Cutoff: 512 (10.0 dB SNR)
+SCP-LOG: <R-HAL:MiniCal><info> DC Microcal for RX 4: microcal converged, but DC diff across Lane is more than 6
+SCP-UHP: SLR_RIDGE: |                                                                                                                                |
+SCP-UHP: SLR_RIDGE: |    47 4         4     4        4   44 5              4          565        54     4      4       4 555      44   4   5   4     |
+SCP-UHP: [3] DET:  17 ( 17 Ss,   0 Dyn);   ACT: Lo:   8 (14.8-16.0 dB SNR), Hi:   0, Xtra:   1, Cutoff:   9 ( 0.0 dB SNR)
+SCP-LOG: <R-HAL:MiniCal><info> DC Microcal for RX 3: microcal converged, but DC diff across Lane is more than 6
+SCP-UHP: SLR_RIDGE: |                                                                                                                                |
+SCP-UHP: SLR_RIDGE: |4   4                            4         54  4        4455         4  44    5            4   4     5       5       44 4   4   |
+SCP-UHP: [4] DET:  17 ( 15 Ss,   2 Dyn);   ACT: Lo: 196 ( 0.0- 0.0 dB SNR), Hi:   1, Xtra:   1, Cutoff: 198 ( 0.5 dB SNR)
