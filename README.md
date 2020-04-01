@@ -24,6 +24,17 @@ Since a PMCW chip can exhibit a period much shorter than a standard FMCW chirp, 
     ├── README.md
     ├── requirements.txt        # Required dependencies to run this package.
 
+### Getting Started
+Welcome! Here are some steps to getting started.
+1. Download [GitHub Desktop](https://desktop.github.com/)
+2. Click "Add"
+3. Click "Clone Repository..."
+4. Click URL
+5. Put (https://github.com/edwin-pan/Borealis.git) into the first box
+6. Put whichever directory you'd like in the second box. 
+7. Click "Clone"
+
+
 ## Introduction
 Human communication manifests itself in many forms. In order to interact with each other, we most often employ our voices to speak, the written word to record messages, and body movement to augment the ways we express ourselves. As we adopt the move towards "smart" devices for our everyday machines, it's imperative that we build out robust systems that allow us to use all of our existing modes of communication to interact with our machines. \\
 Naturally, the microphone's ability to measure incoming sound waves make this sensor well suited to the task of digitizing the human voice. Similarly, a camera's ability to capture high definition colored 2D spatial projections of our 3D environment allows it to be used in image classification (and thus text reading) with high accuracy. For body gestures, humans can gleam this understanding from a temporal sequence of colored 2D images of the 3D environment. However, while the human sensory input might be images, messages are communicated simply because we understand 'what' is moving, 'how' it is moving, and ignore the rest of the extraneous information. As a computer vision task, deciding 'what' is important in a scene and 'how' important things move is itself an ongoing field of study. Just estimating a starting and ending location in a 3D environment from the 2D image is a complex task. Thus, in order to classify human gestures, one option is to look for a more direct means of gathering the useful information without the extraneous data.

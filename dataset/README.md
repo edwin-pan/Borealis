@@ -5,8 +5,11 @@ This is the main entry point for collecting raw data and processing it into the 
 1. Have the Judo module set up in a large open space at about chest height. (~1.5m off the ground)
 2. Set up the Judo radar to record data using the *VP1as* preset scan configuration.
 3. Have multiple people run away from the radar at varying speeds. Do this many many many times. Make sure to have at least 2-3 people. The more the better.
+3. Have multiple people run toward the radar at varying speeds. Do this many many many times. Make sure to have at least 2-3 people. The more the better.
 4. Have multiple people ride bikes away form the radar at varying speeds. Do this many many many times. Also make sure to have at least 2-3 people. The more the better.
-5. Have someone drive a car away from the radar at varying speeds. 
+5. Have multiple people ride bikes toward the radar at varying speeds. Do this many many many times. Also make sure to have at least 2-3 people. The more the better.
+6. Have someone drive a car away from the radar at varying speeds. 
+7. Have someone drive a car toward the radar at varying speeds. 
 
 ## Data Capture
 1. Save *running* scans to: */Borealis/data/raw/running*
