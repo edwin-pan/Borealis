@@ -1,16 +1,11 @@
 # Project Borealis 
 
 ### Abstract
-Today, the latest cutting-edge for user-oriented commercial millimeter-wave (mmwave) radar solutions utilize a Pulse Modulated Continuous Wave (PMCW) transmission signal to obtain highly accurate range information (range resolutions up to a nanometer-level). Conveniently, the same information used to estimate range can, when viewed over multiple modulation cycles, also allow the radar sensor to estimate target velocity (doppler). Viewing frame by frame range-doppler plots allows these systems to perform classification of complex human gestures. 
+Today, the latest cutting-edge for user-oriented commercial millimeter-wave (mmwave) RADAR solutions utilize a Pulse Modulated Continuous Wave (PMCW) transmission signal to obtain useful insight into the area surrounding a spacial region. These RADAR systems can measure near-instantaneous and highly accurate range information (range resolutions up to a nanometer-level), doppler information (resolutions up to a few cm/second), and angular information in both azimuth and elevation. Coupled with RADAR's innate robustness against weather, lighting, and interference from other RADARs, this sensing modality presents itself as a unique means of complementing existing LiDAR and Camera based autonomous driving capabilities.
 
-In the past, gesture classification has been used for small hand gesture classification. In this thesis, 
+Needless to say, the safety of both passengers and passerbys is mission critical. Therefore, it's vital that autonomous systems use their wide array of sensors to detect, track, and classify the types of objects in a scene. If this can be done using only RADAR sensors, correct classification of moving objects can be done irrespective of uncontrollable circumstances like weather and lighting. In this thesis, classification of detections as pedestrian, bicyle, and car is achieved using only the range-doppler information from a single forward facing autonomotive PMCW RADAR system.
 
-One possible application is to use the RADAR system's gesture classification capabilities to classify moving objects as pedestrians, bicycles, or cars. 
-
-Over the last few years, a new class of mmwave radar systems utilizing pulse modulated continuous wave (PMCW) transmission signals have arrived on the consumer market. Since 
-
-
-Since a PMCW chip can exhibit a period much shorter than a standard FMCW chirp, these new radar systems enable much finer range and doppler resolutions (range resolutions at the millimeter-level). Consequently, classification of more sophisticated and subtle gestures should be able to be achieved. This senior research thesis explores the human gesture recognition capabilities of these new PMCW radar systems compared to that of the FMCW radars that preceded it.
+Keywords: rf, radar, PMCW, DCM, classification
 
 ### Directory Structure
     .

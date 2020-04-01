@@ -52,6 +52,7 @@ if __name__ == '__main__':
             local_data[:,local_data.shape[1]//2] = np.min(local_data)
             
             # Normalize
+            print(fname + ": " + str(np.max(local_data)))
             local_data = local_data / np.max(local_data)
             local_data *= 255
             local_data = np.clip(local_data, 0, 255)
