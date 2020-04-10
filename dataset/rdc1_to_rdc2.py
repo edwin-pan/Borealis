@@ -30,7 +30,6 @@ def rdc1_to_rdc2(fpath, visualize_flag=False):
     epath = os.path.join(parts[0], parts[1][:-4]+'exp.bin')
     rpath = os.path.join(parts[0], parts[1][:-8]+'range_bins.bin')
     
-    print(ppath)
     # Load scan parameters
     with open(ppath) as json_file:
       params = json.load(json_file)
@@ -140,15 +139,26 @@ if __name__ == '__main__':
     
     # Define Necessary Constants
     datadir_name = next(os.walk(data_raw_dir))[1] # Grab all scan directories
-    files_per_dir = 5
+    # files_per_dir = 5
     
     for datadir in datadir_name:
         filepath = os.path.join(data_raw_dir, datadir)
-        print("Processing ata @: ", filepath)
-        for i in range(files_per_dir):
-            # Process the data
-            data = rdc1_to_rdc2(os.path.join(filepath, 'scan_00000' + str(i) + '_rdc1.bin'), visualize_flag=True)
-    
-            # Save the data
-            np.save(os.path.join(data_processed_dir, datadir + '_' + str(i)), data)
+        print("Processing at @: ", filepath)
+        for file in os.listdir(filepath):
+            if file.endswith("_rdc1.bin"):
+                print(os.path.join(filepath, file))
+                # Get scan number
+                num = file[-16:-10]
+                
+                # Cover '0' edge case
+                if num == '000000':
+                    idx_str = '0'
+                else:
+                    idx_str = num.lstrip('0')
+                    
+                # Process the data
+                data = rdc1_to_rdc2(os.path.join(filepath, file), visualize_flag=True)
+        
+                # Save the data
+                np.save(os.path.join(data_processed_dir, datadir + '_' + idx_str), data)
     
