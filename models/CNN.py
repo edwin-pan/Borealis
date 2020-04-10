@@ -1,5 +1,7 @@
 import numpy as np
 import torch
+import matplotlib.pyplot as plt
+
 
 class NeuralNet(torch.nn.Module):
     def __init__(self, lrate,loss_fn,in_size,out_size):
@@ -15,15 +17,15 @@ class NeuralNet(torch.nn.Module):
         super(NeuralNet, self).__init__()
 
         # Convolutional Layers
-        self.CNN_layer1 = torch.nn.Sequential(torch.nn.Conv2d(1,6,(5,72),stride=1, padding=2),
+        self.CNN_layer1 = torch.nn.Sequential(torch.nn.Conv2d(3,6,3,stride=1, padding=2),
                                         torch.nn.LeakyReLU(),
                                         torch.nn.MaxPool2d(2,2))
 
-        self.CNN_layer2 = torch.nn.Sequential(torch.nn.Conv2d(6,16,(5,72),stride=1, padding=2),
+        self.CNN_layer2 = torch.nn.Sequential(torch.nn.Conv2d(6,16,3,stride=1, padding=2),
                                         torch.nn.LeakyReLU(),
                                         torch.nn.MaxPool2d(2,2))
         
-        self.model = torch.nn.Sequential(torch.nn.Linear(1200, 512),
+        self.model = torch.nn.Sequential(torch.nn.Linear(133584, 512),
                                         torch.nn.BatchNorm1d(512),
                                         torch.nn.Dropout(0.25),
                                         torch.nn.LeakyReLU(),
@@ -66,18 +68,16 @@ class NeuralNet(torch.nn.Module):
 
     def forward(self, x):
         """ A forward pass of your neural net (evaluates f(x)).
-
         @param x: an (N, in_size) torch tensor
-
         @return y: an (N, out_size) torch tensor of output from the network
         """
         # Check input x is the correct shape
         if len(x.shape) != 4:
-            x = x.view((-1,1,200,72))
+            x = x.view((-1,3,200,72))
 
         # Apply CNN
         yy = self.CNN_layer1(x)
-        # yy = self.CNN_layer2(yy)
+        yy = self.CNN_layer2(yy)
 
         # Apply NN
         y_ = yy.view((yy.shape[0],-1)) # can also call torch.flatten(x, 1) -> this allows for "reshapping" inside sequential
@@ -109,8 +109,7 @@ class NeuralNet(torch.nn.Module):
 
         loss = self.loss_fn(y_p,y) + lr_reg*L2_reg
         
-        # Calculate Error, perform backpropogation
-        self.model.zero_grad() # Unessessary
+        # Perform backpropogationP
         loss.backward()
 
         # Update gradients
@@ -147,87 +146,27 @@ def Normalize(data, sample=True):
     return scaled
 
 
-def fit(train_set, train_labels, test_set, n_iter, batch_size=100):
-    """ Make NeuralNet object 'net' and use net.step() to train a neural net
-    and net(x) to evaluate the neural net.
+def fit(train_loader, n_iter, epochs, batch_size=100):
 
-    Args:
-        train_set: an (N, out_size) torch tensor
-        train_labels: an (N,) torch tensor
-        test_set: an (M,) torch tensor
-        n_iter: int, the number of epochs of training
-        batch_size: The size of each batch to train on. (default 100)
+    # Define input/output sizes
+    in_size=np.nan # Why not used?
+    out_size = 5
 
-    Returns:
-        losses: Array of total loss at the beginning and after each iteration. Ensure len(losses) == n_iter
-        yhats: an (M,) NumPy array of approximations to labels for test_set
-        net: A NeuralNet object
-
-    """
-    in_size=0
-    print("Start training")
-
-    # train_set = torch.tensor(train_set,dtype=torch.float32)
-    train_labels = torch.tensor(train_labels,dtype=torch.int64)
-    # test_set = torch.tensor(test_set,dtype=torch.float32)
-
-    # train_NP = train_set.numpy()
-    # train_TO = torch.from_numpy(train_NP)
-
-    # Force Seed
-    torch.manual_seed(0)
-
-    out_size = 2
-    num_img = train_set.shape[0]
-
+    # Define Loss Function
     loss_fn = torch.nn.CrossEntropyLoss()
-    
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # net = NeuralNet(0.03, loss_fn, in_size, out_size).to_device()
 
     net = NeuralNet(0.03, loss_fn, in_size, out_size).to(device)
 
-    train_set = Normalize(train_set,sample=False)
-    test_set = Normalize(test_set,sample=False)
-    
-    # Epochs 
-    epochs = 6
-
-    # Get batches
-    num_batches = num_img//batch_size
-
-    # Reshape to -1,1,200,72
-    train_set = train_set.view((-1,1,200,72))
-    test_set = test_set.view((-1,1,200,72))
-
-    # Training
     for k in range(epochs):
-        print("Epoch: ", k)
         losses = np.zeros((n_iter))
         net.train()
-        for i in range(num_batches):
-            # idx = batcher(num_img, batch_size, debug=True,debug_iter=i)
-            idx = batcher(num_img, batch_size, seed=int(np.random.rand()*100))
-            
-            curr_set = train_set[idx].to(device)
-            curr_lab = train_labels[idx].to(device)
-            
-            for j in range(n_iter):
-                losses[j] = net.step(curr_set, curr_lab)
-                # print("[#"+str(i)+"] iter:"+str(j)+" Loss:"+str(losses[j]))
-
-            if i % 5 == 0:    # print every 2000 mini-batches
-                print('[%d, %5d] loss: %.3f' %
-                    (i + 1, j + 1, losses[j]))
+        for batch_idx, (data, label) in enumerate(train_loader):
+            for i in range(n_iter):
+                losses[batch_idx] = net.step(data.to(device), label.to(device))
+                if i % 8 and batch_idx % 8:
+                    print("[#"+str(k)+"] batch_idx: "+str(batch_idx) + " iter:"+str(i)+" Loss:"+str(losses[i]))
 
     torch.save(net,"net.model")
 
-    # # Evaluate
-    # net.eval()
-    # yhats_raw = net(test_set).detach().numpy()
-    # yhats = [sample[0]<sample[1] for sample in yhats_raw]
-    
-
-    print("[LOSS]: ", min(losses),max(losses))
-    # return losses, yhats, net
-    return losses, net
+    return net
