@@ -148,7 +148,7 @@ if __name__ == '__main__':
             if file.endswith("_rdc1.bin"):
                 print(os.path.join(filepath, file))
                 # Get scan number
-                num = file[-16:-10]
+                num = file[-15:-9]
                 
                 # Cover '0' edge case
                 if num == '000000':
