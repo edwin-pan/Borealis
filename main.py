@@ -11,16 +11,19 @@ if __name__ == '__main__':
     train_test_split_ratio = 0.1
     number_of_iterations = 10
     train_batch_size = 20
-    number_of_epochs = 6
+    number_of_epochs = 2 # 6
     
     # Load our data
+    print("[Status] Loading Data")
     data_filepath = './data/png'
     datasets = torchvision.datasets.ImageFolder(root=data_filepath, transform=torchvision.transforms.ToTensor())
     
     # Split into Train and Test
+    print("[Status] Splitting Train/Test")
     num_samples = len(datasets)
     indices = list(range(num_samples))
     split_loc = int(np.floor(num_samples*train_test_split_ratio))
+    print("[Info] Testing on ", split_loc, " images")
     
     np.random.shuffle(indices)
     
@@ -34,8 +37,10 @@ if __name__ == '__main__':
 
        
     # Train the CNN -- Edwin
+    print("[Status] Train CNN")
     net = CNN.fit(train_loader, number_of_iterations, number_of_epochs)
     
+    print("[Status] Evaluate CNN")
     # Evaluate on Test Set
     for data, label in test_loader:
         out = net(data)

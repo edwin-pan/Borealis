@@ -101,8 +101,7 @@ def rdc1_to_rdc2(fpath, visualize_flag=False):
     
     validrbinmask = rangeGateMid >= 0
     
-    time_rdc = time_rdc[rangeGateOrdering[validrbinmask],:,:]*np.power(2,params['rdc1_software_exponent'])
-    
+    time_rdc = time_rdc[rangeGateOrdering[validrbinmask],:,:]*2**params['rdc1_software_exponent']
     
     # Begin processing (RDC1->RDC2)
     window = scipy.signal.windows.nuttall(params['num_pulses'])
