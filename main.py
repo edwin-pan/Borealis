@@ -2,9 +2,10 @@
 
 import torch
 import torchvision
-import models.CNN as CNN
+import models.CNN1 as CNN
 import numpy as np
 from torch.utils.data.sampler import SubsetRandomSampler
+import matplotlib.pyplot as plt
 import os
 
 if __name__ == '__main__':
@@ -15,7 +16,7 @@ if __name__ == '__main__':
     train_test_split_ratio = 0.5
     number_of_iterations = 10
     train_batch_size = 20
-    number_of_epochs = 2 # 6
+    number_of_epochs = 6 # 6
     
     # Load our data
     print("[Status] Loading Data")
@@ -46,19 +47,37 @@ if __name__ == '__main__':
         net = CNN.fit(train_loader, number_of_iterations, number_of_epochs)
     else:
         repo_dir = os.path.abspath(os.getcwd())
-        model_dir = os.path.join(repo_dir, 'checkpoints\\net1.model')
+        # model_dir = os.path.join(repo_dir, 'checkpoints\\net1.model')
+        model_dir = os.path.join(repo_dir, 'net.model')
+
         print("[Status] Load CNN @ ", model_dir)
         
         # Load the CNN -- Edwin 
         net = torch.load(model_dir)
         net.eval()
+
     
     print("[Status] Evaluate CNN")
     # Evaluate on Test Set
+    net.eval()
     for data, label in test_loader:
         out = net(data)
         prediction = torch.argmax(out, axis=1)
+        print(prediction)
+        print(label)
+        
+        truth = prediction+label
+        true_positive = len(np.where(truth == 2)[0])
+        true_negative = len(np.where(truth == 0)[0])
+        
+        false = prediction+3*label
+        false_positive = len(np.where(truth == 1)[0])
+        false_negative = len(np.where(truth == 3)[0])
         
         accuracy = torch.sum(prediction==label).float()/len(data)
-        
+        print("--- Results ---")
         print("Accuracy: ", float(accuracy)*100, "%")
+        print("Number of Correst Car: ", true_negative)
+        print("Number of Correct Ped: ", true_positive)
+        print("Predicted car, actually a person: ", false_postive)
+        print("Predicted person, actually a car: ", false_positive)
