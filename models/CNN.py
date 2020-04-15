@@ -179,7 +179,7 @@ def fit(train_loader, n_iter, epochs, batch_size=100):
         net.train()
         for batch_idx, (data, label) in enumerate(train_loader):
             for i in range(n_iter):
-                losses[batch_idx] = net.step(data.to(device), label.to(device))
+                losses[i] = net.step(data.to(device), label.to(device))
                 if i % 8 and batch_idx % 8:
                     print("[#"+str(k)+"] batch_idx: "+str(batch_idx) + " iter:"+str(i)+" Loss:"+str(losses[i]))
 
