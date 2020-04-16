@@ -58,7 +58,7 @@ if __name__ == '__main__':
             local_data[:,local_data.shape[1]//2] = np.min(local_data)
             
             # Perform CFAR
-            fft2d_sum = local_data.astype(np.int64)
+            fft2d_sum = np.log2(local_data).astype(np.int64)
             thresholdDoppler, noiseFloorDoppler = np.apply_along_axis(func1d=dsp.ca_,
                                                                       axis=0,
                                                                       arr=fft2d_sum.T,
@@ -86,9 +86,9 @@ if __name__ == '__main__':
             snr = peakVals - noiseFloorRange[det_peaks_indices[:, 0], det_peaks_indices[:, 1]]
                     
             # Apply mask
-            fft2d_sum[~full_mask] = 0
+            local_data[~full_mask] = 0
             
-            local_data = fft2d_sum
+            # local_data = fft2d_sum
             
             # Normalize
             local_data = local_data / np.max(local_data)
@@ -117,6 +117,7 @@ if __name__ == '__main__':
             # Save to corresponding directory
             print("Saving", fname)
             plt.imsave(os.path.join(class_dir,fname[:-4]+'.png'), np.abs(data[-1]))
+
 
 
 # =============================================================================

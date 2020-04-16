@@ -27,7 +27,7 @@ class NeuralNet(torch.nn.Module):
                                         torch.nn.LeakyReLU())
         
         
-        self.model = torch.nn.Sequential(torch.nn.Linear(276352, 512),
+        self.model = torch.nn.Sequential(torch.nn.Linear(17132544, 512),
                                         torch.nn.BatchNorm1d(512),
                                         torch.nn.Dropout(0.25),
                                         # torch.nn.LeakyReLU(),

@@ -16,29 +16,16 @@ class NeuralNet(torch.nn.Module):
         """
         super(NeuralNet, self).__init__()
 
-        # # Convolutional Layers -- with maxpool
-        # self.CNN_layer1 = torch.nn.Sequential(torch.nn.Conv2d(3,32,3,stride=1, padding=2),
-        #                                 torch.nn.LeakyReLU(),
-        #                                 torch.nn.MaxPool2d(2,2))
-
-        # self.CNN_layer2 = torch.nn.Sequential(torch.nn.Conv2d(32,64,3,stride=1, padding=2),
-        #                                 torch.nn.LeakyReLU(),
-        #                                 torch.nn.MaxPool2d(2,2))
-
-        # self.CNN_layer3 = torch.nn.Sequential(torch.nn.Conv2d(64,128,3,stride=1, padding=2),
-        #                                 torch.nn.LeakyReLU(),
-        #                                 torch.nn.MaxPool2d(2,2))
-        
-        # Convolutional Layers -- w/o maxpool
+        # Convolutional Layers -- with maxpool
         self.CNN_layer1 = torch.nn.Sequential(torch.nn.Conv2d(3,32,3,stride=1, padding=2),
-                                        torch.nn.LeakyReLU())
+                                        torch.nn.LeakyReLU(),
+                                        torch.nn.MaxPool2d(2,2))
 
         self.CNN_layer2 = torch.nn.Sequential(torch.nn.Conv2d(32,64,3,stride=1, padding=2),
-                                        torch.nn.LeakyReLU())
-
-        self.CNN_layer3 = torch.nn.Sequential(torch.nn.Conv2d(64,128,3,stride=1, padding=2),
-                                        torch.nn.LeakyReLU())
+                                        torch.nn.LeakyReLU(),
+                                        torch.nn.MaxPool2d(2,2))
         
+
         
         self.model = torch.nn.Sequential(torch.nn.Linear(276352, 512),
                                         torch.nn.BatchNorm1d(512),
@@ -93,7 +80,6 @@ class NeuralNet(torch.nn.Module):
         # Apply CNN
         yy = self.CNN_layer1(x)
         yy = self.CNN_layer2(yy)
-        yy = self.CNN_layer3(yy)
 
         # Apply NN
         y_ = yy.view((yy.shape[0],-1)) # can also call torch.flatten(x, 1) -> this allows for "reshapping" inside sequential

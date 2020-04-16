@@ -17,24 +17,24 @@ class NeuralNet(torch.nn.Module):
         super(NeuralNet, self).__init__()
 
         # Convolutional Layers -- with maxpool
-        self.CNN_layer1 = torch.nn.Sequential(torch.nn.Conv2d(3,32,3,stride=1, padding=2),
+        self.CNN_layer1 = torch.nn.Sequential(torch.nn.Conv2d(3,6,3,stride=1, padding=2),
                                         torch.nn.LeakyReLU(),
                                         torch.nn.MaxPool2d(2,2))
 
-        self.CNN_layer2 = torch.nn.Sequential(torch.nn.Conv2d(32,64,3,stride=1, padding=2),
+        self.CNN_layer2 = torch.nn.Sequential(torch.nn.Conv2d(6,16,3,stride=1, padding=2),
                                         torch.nn.LeakyReLU(),
                                         torch.nn.MaxPool2d(2,2))
         
 
         
-        self.model = torch.nn.Sequential(torch.nn.Linear(276352, 512),
+        self.model = torch.nn.Sequential(torch.nn.Linear(133584, 512),
                                         torch.nn.BatchNorm1d(512),
                                         torch.nn.Dropout(0.25),
-                                        # torch.nn.LeakyReLU(),
+                                        torch.nn.LeakyReLU(),
                                         torch.nn.Linear(512, 256),
                                         torch.nn.BatchNorm1d(256),
                                         torch.nn.Dropout(0.25),
-                                        # torch.nn.LeakyReLU(),
+                                        torch.nn.LeakyReLU(),
                                         torch.nn.Linear(256, out_size),
                                         torch.nn.LeakyReLU())
 

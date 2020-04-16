@@ -63,8 +63,6 @@ if __name__ == '__main__':
     for data, label in test_loader:
         out = net(data)
         prediction = torch.argmax(out, axis=1)
-        print(prediction)
-        print(label)
         
         truth = prediction+label
         true_positive = len(np.where(truth == 2)[0])
@@ -77,7 +75,7 @@ if __name__ == '__main__':
         accuracy = torch.sum(prediction==label).float()/len(data)
         print("--- Results ---")
         print("Accuracy: ", float(accuracy)*100, "%")
-        print("Number of Correst Car: ", true_negative)
+        print("Number of Correct Car: ", true_negative)
         print("Number of Correct Ped: ", true_positive)
-        print("Predicted car, actually a person: ", false_postive)
+        print("Predicted car, actually a person: ", false_negative)
         print("Predicted person, actually a car: ", false_positive)
